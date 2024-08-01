@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User List</title>
+    <style>
+        /* Reset some default styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f3f4f6;
+            padding: 20px;
+        }
+
+        .container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+            margin: auto;
+            max-width: 900px;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #333;
+            text-align: center;
+        }
+
+        h2 {
+            margin: 10px 0;
+            color: #555;
+            text-align: center;
+        }
+
+        form {
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center; /* Added for better centering */
+        }
+
+        input[type="text"] {
+            padding: 10px;
+            width: calc(100% - 22px);
+            max-width: 400px; /* Limiting width for better readability */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            margin-right: 10px;
+            transition: border-color 0.3s;
+        }
+
+        input[type="text"]:focus {
+            border-color: #7385F2;
+            outline: none;
+        }
+
+        button {
+            padding: 10px 15px;
+            border: none;
+            background-color: #7385F2;
+            color: white;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+
+        button:hover {
+            background-color: #5a6fb1;
+            transform: scale(1.05);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+            transition: background-color 0.3s;
+        }
+
+        th {
+            background-color: #f2f2f2;
+            font-weight: bold;
+        }
+
+        tr:hover {
+            background-color: #f9f9f9;
+        }
+
+        a {
+            text-decoration: none;
+            color: #7385F2;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        form button[type="submit"] {
+            background-color: #e74c3c;
+        }
+
+        form button[type="submit"]:hover {
+            background-color: #c0392b;
+        }
+
+        .stats {
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            input[type="text"], button {
+                width: 100%;
+                margin-bottom: 10px;
+            }
+
+            form {
+                flex-direction: column;
+                align-items: stretch; /* Ensures elements are stacked nicely */
+            }
+
+            .stats {
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .stats span {
+                margin: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>User List</h1>
+
+        <!-- Search form -->
+        <form action="/api/users/search" method="get">
+            <input type="text" name="query" placeholder="Search by User ID or Name" required>
+            <button type="submit">Search</button>
+        </form>
+
+        <!-- Statistics -->
+        <div class="stats">
+            <span>Total Users: <%= users.length %></span>
+            <span>Total Admins: <%= adminCount %></span>
+            <span>Total HODs: <%= hodCount %></span>
+            <span>Total Drivers: <%= driverCount %></span>
+            <span>Total Employees: <%= employeeCount %></span>
+        </div>
+
+        <!-- User table -->
+        <table>
+            <thead>
+                <tr>
+                    <th>User ID</th>
+                    <th>Name</th>
+                    <th>Role</th>
+                    <th>Department</th>
+                    <th>Password</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% users.forEach(user => { %>
+                <tr>
+                    <td><%= user.userId %></td>
+                    <td><%= user.name %></td>
+                    <td><%= user.role %></td>
+                    <td><%= user.department %></td>
+                    <td><%= user.password %></td>
+                    <td>
+                        <a href="/api/users/edit/<%= user.userId %>">Edit</a>
+                        <form action="/api/users/delete/<%= user.userId %>" method="post" style="display:inline;">
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
+                <% }) %>
+            </tbody>
+        </table>
+
+        <!-- Add new user link -->
+        <a href="/api/users/add-new" style="display:block; text-align:center; margin-top:20px; color: #7385F2;">Add New User</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="icon" href="https://image.flaticon.com/icons/png/512/3069/3069028.png" type="image/png" sizes="16*16" />
+    <title>Employee</title>
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: "Poppins", sans-serif;
+        }
+
+        :root {
+            --main-color: #fff;
+            --main-bg-color: #11101d;
+            --second-bg-color: #1d1b31;
+            --third-bg-color: #4f4d66;
+        }
+
+        body {
+            color: whitesmoke;
+        }
+
+        .sidebar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 260px;
+            background: var(--main-bg-color);
+            z-index: 100;
+            transition: all 0.5s ease-in-out;
+        }
+
+        .sidebar.close {
+            width: 68px;
+        }
+
+        .sidebar .logo-name {
+            white-space: nowrap;
+            font-size: 22px;
+            color: var(--main-color);
+            font-weight: 600;
+            transition: all 0.2s ease-in-out;
+        }
+
+        .nav-links {
+            height: 100%;
+            padding-top: 30px;
+            overflow: auto;
+            background-color: #212B36;
+        }
+
+        .sidebar.close .nav-links {
+            overflow: visible;
+        }
+
+        .nav-links::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-links i {
+            height: 50px;
+            min-width: 70px;
+            text-align: center;
+            line-height: 50px;
+            color: var(--main-color);
+            font-size: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .nav-links .nav-list.show-menu i.arrow {
+            transform: rotate(-180deg);
+        }
+
+        .sidebar.close .nav-list i.arrow {
+            display: none;
+        }
+
+        .nav-links .nav-list {
+            position: relative;
+            list-style: none;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .nav-links .nav-list.show-menu .sub-menu {
+            display: block;
+        }
+
+        .nav-list:hover {
+            background-color: var(--second-bg-color);
+        }
+
+        .nav-list a {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+        }
+
+        .link-name {
+            font-size: 18px;
+            font-weight: 400;
+            color: var(--main-color);
+            transition: all 0.3s ease-in-out;
+            transition-delay: 0.1s;
+        }
+
+        .sidebar.close .link-name {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .icon-link {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+        }
+
+        .sidebar.close .icon-link {
+            display: block;
+        }
+
+        .sub-menu {
+            padding: 6px 6px 14px 72px;
+            list-style: none;
+            margin-top: -10px;
+            background-color: var(--second-bg-color);
+            display: none;
+        }
+
+        .sub-menu .inner-nav-list a {
+            color: var(--main-color);
+            font-size: 15px;
+            padding: 5px 0;
+            white-space: nowrap;
+            opacity: 0.6;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .sub-menu .inner-nav-list a:hover {
+            opacity: 1;
+        }
+
+        .sidebar.close .sub-menu {
+            position: absolute;
+            left: 100%;
+            top: -10px;
+            margin-top: 0;
+            padding: 10px 20px;
+            border-radius: 0 6px 6px 0;
+            transition: 0s;
+            opacity: 0;
+            display: block;
+            pointer-events: none;
+        }
+
+        .nav-list:hover .sub-menu {
+            top: 0;
+            opacity: 1;
+            pointer-events: auto;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .sidebar .sub-menu .link-name {
+            display: none;
+        }
+
+        .sidebar.close .sub-menu .link-name {
+            font-size: 18px;
+            opacity: 1;
+            display: block;
+        }
+
+        .sidebar .sub-menu.blank {
+            pointer-events: auto;
+            padding: 3px 20px 6px 16px;
+            pointer-events: none;
+        }
+
+        .sidebar .nav-list:hover .sub-menu.sub-menu.blank {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .sidebar .profile-details {
+            padding: 15px 0;
+            position: fixed;
+            bottom: 0;
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            background-color: var(--second-bg-color);
+            max-width: 260px;
+            transition: all 0.5s ease-in-out;
+            overflow: hidden;
+        }
+
+        .sidebar.close .profile-details {
+            background-color: var(--main-bg-color);
+            max-width: 68px;
+        }
+
+        .sidebar .profile-content img {
+            width: 50px;
+            height: 50px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin: 0 12px 0 10px;
+            background: var(--second-bg-color);
+            padding: 10px;
+            transition: all 0.4s ease-in-out;
+        }
+
+        .sidebar.close .profile-content img {
+            padding: 5px;
+        }
+
+        .profile-name {
+            color: var(--main-color);
+            font-size: 16px;
+            font-weight: 500;
+            width: 120px;
+            line-height: 20px;
+        }
+
+        .profile-job {
+            color: var(--main-color);
+            font-size: 12px;
+        }
+
+        .profile-person {
+            transition: all 0.5s ease-in-out;
+        }
+
+        .sidebar .profile-details i,
+        .sidebar .profile-details .profile-name,
+        .sidebar .profile-details .profile-job {
+            transition: all 0.5s ease-in-out;
+        }
+
+        .sidebar.close .profile-details i,
+        .sidebar.close .profile-details .profile-name,
+        .sidebar.close .profile-details .profile-job {
+            opacity: 0;
+        }
+
+        .home-section {
+            position: relative;
+            left: 68px;
+            height: 100vh;
+            width: calc(100% - 68px);
+            transition: all 0.5s ease-in-out;
+            background-color: whitesmoke;
+            padding: 20px;
+        }
+
+        .sidebar.close~.home-section {
+            left: 68px;
+            width: calc(100% - 68px);
+        }
+
+        .home-content {
+            display: flex;
+            align-items: center;
+            background-color: #624BFF;
+            border-radius: 10px;
+            padding: 10px;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .home-content .bx-menu {
+            font-size: 35px;
+            color: var(--third-bg-color);
+            cursor: pointer;
+        }
+
+        .home-content .home-text {
+            color: whitesmoke;
+            font-size: 24px;
+            font-weight: 600;
+        }
+
+        .home-content .text {
+            background-color: rgb(124, 230, 156);
+            border-radius: 10px;
+            padding: 10px 20px;
+        }
+
+        .home-content .text a {
+            color: whitesmoke;
+            text-decoration: none;
+        }
+
+        .notify {
+            margin-top: 20px;
+        }
+
+        .leed {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--second-bg-color);
+            padding: 10px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .leed p {
+            margin: 0;
+            padding: 0 10px;
+        }
+
+        .leed p:nth-child(2) {
+            padding: 5px 10px;
+            border-radius: 5px;
+            color: #000;
+            font-weight: bold;
+        }
+
+        .EMTRFs-list {
+            margin-top: 20px;
+        }
+
+        .EMTRFs-list ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .EMTRFs-item {
+            background-color: var(--second-bg-color);
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        .EMTRFs-header {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .EMTRFs-header:hover {
+            background-color: #3a3a60;
+            border-radius: 5px;
+            padding: 10px;
+        }
+
+        .EMTRFs-details {
+            display: none;
+            margin-top: 10px;
+        }
+
+        .EMTRFs-item.active .EMTRFs-details {
+            display: block;
+        }
+
+        .EMTRFs-details div {
+            margin-bottom: 8px;
+        }
+
+        .EMTRFs-details strong {
+            color: var(--main-color);
+        }
+
+
+        @media (max-width: 768px) {
+            .home-content {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 10px;
+            }
+
+            .home-content .home-text,
+            .home-content .text {
+                margin-top: 10px;
+            }
+
+            .notify {
+                margin-top: 10px;
+            }
+
+            .leed {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .leed p {
+                padding: 5px 0;
+            }
+
+            .leed p:nth-child(2) {
+                padding: 5px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .home-content {
+                padding: 10px;
+            }
+
+            .home-content .home-text,
+            .home-content .text {
+                margin-top: 10px;
+            }
+
+            .notify {
+                margin-top: 10px;
+            }
+
+            .leed {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .leed p {
+                padding: 5px 0;
+            }
+
+            .leed p:nth-child(2) {
+                padding: 5px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="sidebar close">
+        <ul class="nav-links">
+            <li class="nav-list">
+                <a href="/employee/dashboard">
+                    <i class="bx bx-cog"></i>
+                    <span class="link-name">Close</span>
+                </a>
+            </li>
+            <!-- <li class="nav-list">
+                <a href="#">
+                    <i class="bx bx-grid-alt"></i>
+                    <span class="link-name">TRF</span>
+                </a>
+            </li> -->
+            <li class="nav-list">
+                <div class="icon-link">
+                    <a href="/employee/Sta">
+                        <i class="bx bx-collection"></i>
+                        <span class="link-name">Stationery</span>
+                    </a>
+                </div>
+            </li>
+            <li class="nav-list">
+                <a href="#">
+                    <i class="bx bx-history"></i>
+                    <span class="link-name">History</span>
+                </a>
+            </li>
+            <li class="nav-list">
+                <a href="/">
+                    <i class="bx bx-cog"></i>
+                    <span class="link-name">Logout</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+    <section class="home-section">
+        <form class="filter-form" action="/employee/dashboard" method="GET">
+            <label for="startDate">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" required>
+            <label for="endDate">End Date:</label>
+            <input type="date" id="endDate" name="endDate" required>
+            <button type="submit">Filter</button>
+        </form>
+        <div class="home-content">
+            <i class="bx bx-menu"></i>
+            <span class="home-text">
+                <%= user.name %> Employee TRF
+            </span>
+            <span class="text"><a class="create" href="/employee/travel-request-form">Create</a></span>
+        </div>
+        <div class="EMTRFs-list">
+
+            <ul>
+                <% if (EMTRF.length> 0) { %>
+                    <% EMTRF.forEach(item=> { %>
+                        <li class="EMTRFs-item">
+                            <div class="EMTRFs-header">
+                                <strong></strong>
+                                <%= item.dateOfRequest.toDateString() %>
+                                    <!-- <span>Click for details</span> -->
+                            </div>
+                            <div class="EMTRFs-details">
+                                <div><strong>Traveller Name:</strong>
+                                    <%= item.travellerName %>
+                                </div>
+                                <div>
+                                    <strong>Date of Request:</strong>
+                                    <%= item.dateOfRequest.toDateString() %><br>
+                                </div>
+                                <div><strong>Mobile No:</strong>
+                                    <%= item.mobileNo %>
+                                </div>
+                                <div><strong>Employee Code:</strong>
+                                    <%= item.employeeCode %>
+                                </div>
+                                <div><strong>Department Name:</strong>
+                                    <%= item.departmentName %>
+                                </div>
+                                <div><strong>Band Designation:</strong>
+                                    <%= item.bandDesignation %>
+                                </div>
+                                <div><strong>Email Address:</strong>
+                                    <%= item.emailAddress %>
+                                </div>
+                                <div><strong>HOD Name:</strong>
+                                    <%= item.hodId %>
+                                </div>
+                                <div><strong>Departure Date:</strong>
+                                    <%= new Date(item.departureDate).toLocaleDateString() %>
+                                </div>
+                                <div><strong>Depart From:</strong>
+                                    <%= item.departFrom %>
+                                </div>
+                                <div><strong>Departure Time:</strong>
+                                    <%= item.departureTime %>
+                                </div>
+                                <div><strong>Arrival To:</strong>
+                                    <%= item.arrivalTo %>
+                                </div>
+                                <div><strong>Arrival Time:</strong>
+                                    <%= item.arrivalTime %>
+                                </div>
+                                <div><strong>Hotel Name:</strong>
+                                    <%= item.hotelName %>
+                                </div>
+                                <div><strong>Hotel City:</strong>
+                                    <%= item.hotelCity %>
+                                </div>
+                                <div><strong>Check-In Date:</strong>
+                                    <%= new Date(item.checkInDate).toLocaleDateString() %>
+                                </div>
+                                <div><strong>Check-Out Date:</strong>
+                                    <%= new Date(item.checkOutDate).toLocaleDateString() %>
+                                </div>
+                                <div><strong>Nights:</strong>
+                                    <%= item.nights %>
+                                </div>
+                                <div><strong>Location:</strong>
+                                    <%= item.location %>
+                                </div>
+                                <div><strong>RequisitionerName:</strong>
+                                    <%= item.requisitionerName %>
+                                </div>
+                                <div><strong>department:</strong>
+                                    <%= item.department %>
+                                </div>
+                                <div><strong>date:</strong>
+                                    <%= item.date %>
+                                </div>
+                                <div><strong>itemDescription:</strong>
+                                    <%= item.itemDescription %>
+                                </div>
+                                <div><strong>priority:</strong>
+                                    <%= item.priority %>
+                                </div>
+                                <div><strong>RequisitionerName:</strong>
+                                    <%= item.requisitionerName %>
+                                </div>
+                                <div><strong>department:</strong>
+                                    <%= item.department %>
+                                </div>
+                                <div><strong>date:</strong>
+                                    <%= item.date %>
+                                </div>
+                                <div><strong>itemDescription:</strong>
+                                    <%= item.itemDescription %>
+                                </div>
+                                <div><strong>priority:</strong>
+                                    <%= item.priority %>
+                                </div>
+                                <strong>Status:</strong>
+                                <%= item.status %><br>
+                                    <% if (item.decision) { %>
+                                        <strong>Decision:</strong>
+                                        <%= item.decision %><br>
+                                            <% } %>
+                            </div>
+                        </li>
+                        <% }) %>
+                            <% } else { %>
+                                <li>No EMTRFs found</li>
+                                <% } %>
+            </ul>
+
+        </div>
+    </section>
+    <script>
+        let arrow = document.querySelectorAll(".arrow");
+
+        arrow.forEach((btnArrow) => {
+            btnArrow.addEventListener("click", () => {
+                let arrowParent = btnArrow.parentElement.parentElement;
+                arrowParent.classList.toggle("show-menu");
+            });
+        });
+
+        let sidebar = document.querySelector(".sidebar");
+        let bxMenu = document.querySelector(".bx-menu");
+
+        bxMenu.addEventListener("click", () => {
+            sidebar.classList.toggle("close");
+        });
+
+        // Toggle details visibility on header click
+        document.querySelectorAll('.EMTRFs-header').forEach(header => {
+            header.addEventListener('click', () => {
+                header.parentElement.classList.toggle('active');
+            });
+        });
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,222 @@
+<!-- views/em_TRF.ejs  -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Request Form</title>
+    <style>
+        body {
+            font-family: Calibri, sans-serif;
+            background-color: #f0f8ff;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .header img.logo {
+            max-width: 200px;
+            margin-bottom: 10px;
+        }
+
+        .header h1 {
+            color: #333;
+            margin: 0;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        }
+
+        fieldset {
+            border: 2px solid #4CAF50;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            padding: 20px;
+        }
+
+        legend {
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #333;
+        }
+
+        input[type="text"],
+        input[type="tel"],
+        input[type="email"],
+        input[type="date"],
+        input[type="time"],
+        input[type="number"],
+        select,
+        datalist {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"] {
+            width: 100%;
+            padding: 15px;
+            background-color: #4CAF50;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .contact-us {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .contact-us ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .contact-us li {
+            margin: 5px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhekDPGVGK7t6pEOYOVQaJNa3XQ0RRNXkd_ghJTJUj9YmpaOoILiF-eKs-o2pSWBa_dc934bqqQeHpTJQY7TI1LUvPeF_lf4k5O5p95UBm_tvjMskinpwdE5dF3OZ1u8giaVHeJrsmRRnfbnr8S51ss6BkcJQVIHi8AeTyexUUD37-wfiwE0qriyxKRMnk/s1600/CEA.jpg"
+                alt="Logo" class="logo">
+            <h1>CAE Simulation Training Private Limited - TRF / SRF</h1>
+        </div>
+        <form action="/api/HOD/ADMIN/TRF" method="POST">
+
+            <label for="hodId">HOD ID:</label>
+            <input type="text" id="hodId" name="hodId" required><br>
+
+            <label for="departureDate">dateOfRequest:</label>
+            <input type="date" id="dateOfRequest" name="dateOfRequest" required><br>
+            
+            <label for="travellerName">Traveller Name:</label>
+            <input type="text" id="travellerName" name="travellerName"><br>
+
+            <label for="mobileNo">Mobile No:</label>
+            <input type="text" id="mobileNo" name="mobileNo"><br>
+
+            <label for="departmentName">Department Name:</label>
+            <input type="text" id="departmentName" name="departmentName"><br>
+
+            <label for="bandDesignation">Band Designation:</label>
+            <input type="text" id="bandDesignation" name="bandDesignation"><br>
+
+            <label for="emailAddress">Email Address:</label>
+            <input type="email" id="emailAddress" name="emailAddress"><br>
+
+            <label for="departureDate">Departure Date:</label>
+            <input type="date" id="departureDate" name="departureDate"><br>
+
+            <label for="departFrom">Depart From:</label>
+            <input type="text" id="departFrom" name="departFrom"><br>
+
+            <label for="departureTime">Departure Time:</label>
+            <input type="time" id="departureTime" name="departureTime"><br>
+
+            <label for="arrivalTo">Arrival To:</label>
+            <input type="text" id="arrivalTo" name="arrivalTo"><br>
+
+            <label for="arrivalTime">Arrival Time:</label>
+            <input type="time" id="arrivalTime" name="arrivalTime"><br>
+
+            <label for="hotelName">Hotel Name:</label>
+            <input type="text" id="hotelName" name="hotelName"><br>
+
+            <label for="hotelCity">Hotel City:</label>
+            <input type="text" id="hotelCity" name="hotelCity"><br>
+
+            <label for="checkInDate">Check-In Date:</label>
+            <input type="date" id="checkInDate" name="checkInDate"><br>
+
+            <label for="checkOutDate">Check-Out Date:</label>
+            <input type="date" id="checkOutDate" name="checkOutDate"><br>
+
+            <label for="nights">Nights:</label>
+            <input type="number" id="nights" name="nights"><br>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location"><br>
+
+            <h1 style="text-align: center;">SRF</h1>
+
+            <label for="requisitionerName">Requisitioner's Name:</label>
+            <input type="text" id="requisitionerName" name="requisitionerName"><br>
+
+            <label for="department">Department:</label>
+            <input type="text" id="department" name="department"><br>
+
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date"><br>
+
+            <label for="itemDescription">Item Description:</label>
+            <input type="text" id="itemDescription" name="itemDescription"><br>
+
+            <label for="quantity">Quantity:</label>
+            <input type="number" id="quantity" name="quantity"><br>
+
+            <button type="submit">Submit</button>
+        </form>
+
+        <section class="contact-us">
+            <h2>Contact Us</h2>
+            <p>If you have any queries, please feel free to contact:</p>
+            <ul>
+                <li>Name: Sandeep Bhatia</li>
+                <li>Mobile: 9644304333</li>
+                <li>Email: sandeep.bhatia@cae.com</li>
+            </ul>
+        </section>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        socket.on('formUpdate', (data) => {
+            console.log(data.message);
+            // Update the UI or reload the page
+            location.reload(); // Reload the page to update the list
+        });
+    </script>
+
+</body>
+
+</html>

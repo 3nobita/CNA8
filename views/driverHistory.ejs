@@ -1,0 +1,49 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="booking-list">
+        <ul>
+            <% if (bookingList && bookingList.length > 0) { %>
+                <% bookingList.forEach(booking => { %>
+                    <li class="booking-item">
+                        <div class="booking-header">
+                            <strong>Date:</strong> <%= new Date(booking.date).toLocaleDateString() %>
+                            <span>Click for details</span>
+                        </div>
+                        <div class="booking-details">
+                            <div><strong>Driver ID:</strong> <%= booking.driverId %></div>
+                            <div><strong>Driver Name:</strong> <%= booking.driverName %></div>
+                            <div><strong>Cab Number:</strong> <%= booking.cabNumber %></div>
+                            <div><strong>Passenger Name:</strong> <%= booking.passengerName %></div>
+                            <div><strong>Pickup Location:</strong> <%= booking.pickupLocation %></div>
+                            <div><strong>Dropoff Location:</strong> <%= booking.dropoffLocation %></div>
+                            <div><strong>Pickup Time:</strong> <%= new Date(booking.pickupTime).toLocaleTimeString() %></div>
+                            <div><strong>Dropoff Time:</strong> <%= new Date(booking.dropoffTime).toLocaleTimeString() %></div>
+                            <div><strong>Notes:</strong> <%= booking.notes %></div>
+                            <form action="/api/driver/updateBooking" method="POST">
+                                <input type="hidden" name="bookingId" value="<%= booking._id %>">
+                                <div>
+                                    <label for="distanceTraveled_<%= booking._id %>">Distance Traveled (KM):</label>
+                                    <input type="number" id="distanceTraveled_<%= booking._id %>" name="distanceTraveled" required>
+                                </div>
+                                <div>
+                                    <label for="tollUsage_<%= booking._id %>">Toll Usage:</label>
+                                    <input type="text" id="tollUsage_<%= booking._id %>" name="tollUsage" required>
+                                </div>
+                                <button type="submit">Update Booking</button>
+                            </form>
+                        </div>
+                    </li>
+                <% }); %>
+            <% } else { %>
+                <li>No bookings found</li>
+            <% } %>
+        </ul>
+    </div>
+</body>
+</html> -->

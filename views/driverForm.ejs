@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cab Booking Form</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            background-color: #e0f7fa;
+            /* Light cyan background */
+            margin: 0;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        header img {
+            max-width: 100px;
+            height: auto;
+        }
+
+        header h1 {
+            font-size: 26px;
+            text-transform: uppercase;
+            margin: 0;
+            color: #00695c;
+            /* Teal color */
+        }
+
+        form {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #00897b;
+            /* Teal border */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 24px;
+            color: #004d40;
+            /* Dark teal color */
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #00796b;
+            /* Medium teal color */
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            box-sizing: border-box;
+            border: 1px solid #b2dfdb;
+            /* Light teal border */
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .form-actions {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .form-actions button {
+            padding: 12px 20px;
+            background-color: #00796b;
+            /* Medium teal background */
+            color: #ffffff;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-actions button:hover {
+            background-color: #004d40;
+            /* Dark teal on hover */
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgJOtMlU4h8E4mfpgL1LxAi7j9peIdInZHsKlPfg3ciMColbQXYFZRGndw4hADpGQQ5rDEo5xZMQ4cRWaxaDhnwyRrVTob6VwD79xfVKDPWwReIJKj4KSWpKUdWZrNZzxPirQuwq1d2hhK5K9JUQYgt0Yv8XuJdzoGX25MOIhjAUsSmY4HBThol1e-KXvQ/s367/CEA-removebg-preview.png"
+            alt="CAE Simulation Training Private Limited">
+        <h1>CAE Simulation Training Private Limited</h1>
+    </header>
+
+    <form action="/api/users/hod/bookings" method="POST">
+        <h2>Cab Booking Form</h2>
+
+        <div class="form-group">
+            <label for="date">Date:</label>
+            <input type="date" id="date" name="date" required>
+        </div>
+
+        <div class="form-group">
+            <label for="driverId">Driver ID:</label>
+            <input type="text" id="driverId" name="driverId" required>
+        </div>
+
+        <div class="form-group">
+            <label for="driverName">Driver Name:</label>
+            <input type="text" id="driverName" name="driverName" required>
+        </div>
+
+        <div class="form-group">
+            <label for="cabNumber">Cab Number:</label>
+            <input type="text" id="cabNumber" name="cabNumber" >
+        </div>
+
+        <div class="form-group">
+            <label for="passengerName">Passenger Name:</label>
+            <input type="text" id="passengerName" name="passengerName" >
+        </div>
+
+        <div class="form-group">
+            <label for="pickupLocation">Pickup Location:</label>
+            <input type="text" id="pickupLocation" name="pickupLocation" >
+        </div>
+
+        <div class="form-group">
+            <label for="dropoffLocation">Drop-off Location:</label>
+            <input type="text" id="dropoffLocation" name="dropoffLocation" >
+        </div>
+
+        <div class="form-group">
+            <label for="pickupTime">Time to Pick Up:</label>
+            <input type="text" id="pickupTime" name="pickupTime" >
+        </div>
+
+        <div class="form-group">
+            <label for="dropoffTime">Time to Drop Off:</label>
+            <input type="text" id="dropoffTime" name="dropoffTime" >
+        </div>
+
+        <div class="form-group">
+            <label for="notes">Notes:</label>
+            <textarea id="notes" name="notes" rows="4"></textarea>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit">Submit Booking</button>
+        </div>
+    </form>
+
+</body>
+
+</html>
